@@ -3,100 +3,119 @@
 }
 
 header {
-	border-bottom: 1px solid #666;
+	border-bottom: 1px solid #666; /*нижняя черта*/
+	background: #000;
 	}
 
+
 header * {
-	display: inline-block;
-	text-decoration: none;	
-	color: #000;
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-	font-size: 13px;
-	padding: 5px;
+	display: inline-block; /*делаем блочные элементы строчными*/
+	text-decoration: none; /*текст без подчёркивний*/
+	color: white; /*цвет текста*/
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;/*шрифт*/
+	font-size: 13px; /*размер щрифта*/
+	padding: 5px; /*внутренние отступы*/
 }
+
 
 .text {
 	padding-right: 100px; /*отступ*/
-	border-left: 1px solid #000; /* черная полоска */
+	border-left: 1px solid white; /* черная полоска */
 	margin-left: -2px; /* наложение этой полоски на край лого */
-	position: relative; /*padding-right: 100px?*/
+	position: relative; /*Относительное позиционирование сдвигает элемент относительно его обычного положения. Для того, чтобы применить относительное 
+	позиционирование, необходимо указать элементу CSS-свойство position: relative и координаты left/right/top/bottom*/
+	top: -5px;
+	left: 5px; 
 }
 
 /*мы задали блочную обтекаемость и позиционирование относительно исходного места. Это делается для того, чтобы подчеркивание не вылезало за пределы элемента*/
 a { 
-	display: inline-block; 
-	position: relative; 
-	text-decoration: none; 
+	display: inline-block; /*делаем блочные элементы строчными*/
+	position: relative; /*Относительное позиционирование сдвигает элемент относительно его обычного положения. Для того, чтобы применить относительное 
+	позиционирование, необходимо указать элементу CSS-свойство position: relative и координаты left/right/top/bottom*/
+	text-decoration: none;
+	top: -5px;
+	left: 5px; 
 }
 
 /*Т.е. высота линии подчеркивания будет 2px, длина 0, красного цвета, а за анимацию отвечает свойство transition. Ну и конечно же, отступ слева на 50%, т.е. центральная точка*/ 
 a::before { 
-	display: block; 
+	/*зачем нам здесь устанавливать display: block, если и без него всё хорошо работает?*/
+	display: block; /*на строку, на которой расположился блок, уже нельзя добавить другой элемент, даже когда остаётся пустое пространство*/
 	position: absolute; 
 	content: ""; 
-	height: 2px; 
-	width: 0; 
-	background-color: red; 
-	transition: width .5s ease-in-out, left .5s ease-in-out; 
-	left: 50%; 
-	bottom: 0; 
+	height: 2px; /*ширина*/
+	width: 0; /*высота*/
+	background-color: yellow; 
+	transition: width .5s ease-in-out, left .5s ease-in-out; /*способ контролировать скорость анимации, при изменении CSS свойств.
+	ease-in-out - переход медленно начинается и медленно заканчивается*/
+	left: 50%;
+	bottom: 0; /*подчёркивание снизу*/
 }
 
-/*это позиционирование линии подчёркивания до того, как курсон зашёл в её поле*/
+/*это позиционирование линии подчёркивания до того, как курсон зашёл в её поле?*/
 a::after { 
 	display: block; 
 	position: absolute; 
 	content: ""; 
 	height: 2px; 
-	width: 0; 
-	background-color: red; 
+	width: 0px; 
+	background-color: yellow; 
 	transition: width .5s ease-in-out; 
 	left: 50%; 
 	bottom: 0; 
 }
 
 /*а это после*/
+/* hover - определяет стиль элемента при наведении на него курсора мыши, но при этом элемент еще не активирован */
 a:hover::before { 
 	width: 50%; 
 	left: 0; 
 } 
 a:hover::after { 
-	width: 50%; 
+	width: 50%;
+	right: 0; 
 }
 
 /*ниже код встроеной картинки*/
 
 .container {
-  width: 1200px;
+	position: absolut;
+	display: block;
+	width: 1200px;
+	height: 550px;
   padding: 0 15px;
   margin: 50px auto;
-  text-align: center;
+	text-align: center;
+	overflow: scroll;
+	background: #000;
 }
 
 .card {
   width: 300px;
   display: inline-block;
   margin: 0;
-  box-shadow: 5px 3px 25px rgba(0, 0, 0, .3);
-  position: relative;
-  overflow: hidden;
+  box-shadow: 5px 3px 25px rgba(250, 248, 248, 0.897);
+	position: relative;
+	top: 0px;
+	overflow: scroll;
 }
 
 .card:before, .card:after {
   content: '';
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, .5);
-  position: absolute;
+  background: rgba(252, 248, 248, 0.5);
+	position: absolute;
 }
 
 .card:before {
   left: -100%;
   top: -100%;
-  transition: left .5s linear, top .5s linear;
+  transition: left .5s ease-in-out, top .5s ease-in-out;
 }
 
-.card:after {
+/*.card:after {
   bottom: -100%;
   right: -100%;
   transition: bottom .5s linear, right .5s linear;
@@ -106,7 +125,7 @@ a:hover::after {
   left: 0;
   top: 0;
 }
-
+*/
 .card:hover:after {
   right: 0;
   bottom: 0;
@@ -119,6 +138,24 @@ a:hover::after {
 
 .card-description {
   padding: 15px 10px;
-  text-align: left;
-  max-height: 300px;
+  text-align: center;
+	max-height: 300px;
+	background: #000;
+	color: white;
+}
+
+.container-inner {
+position: relative;
+top: -400px; /*отступ от верхней границы и мы его можем указывать только при использовании position: absolute. Если его не установить, то блок опускается*/
+left: 850px;
+overflow: scroll; /* прокрутка по вертикали */
+padding: 15px; /* Поля вокруг текста */
+background: black; /* Цвет фона */
+border: 1px solid white; /* Параметры рамки */
+width: 300px; /* Ширина блока */
+height: 800px; /* Высота блока */
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
+font-size: 14px;
+color: white;
+box-shadow: 5px 3px 25px rgba(250, 248, 248, 0.897);
 }
